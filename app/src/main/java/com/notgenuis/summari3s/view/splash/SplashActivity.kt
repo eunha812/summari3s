@@ -15,7 +15,9 @@ import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.view.config.ConfigurationActivity
 import com.notgenuis.summari3s.view.onboard.OnBoardingActivity
 import com.notgenuis.summari3s.view.ui.theme.Summari3sTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
