@@ -70,6 +70,7 @@ dependencies {
 
 
     def retrofit_version = "2.9.0"
+    def lottie_version = "6.0.0"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
@@ -84,6 +85,15 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // Navigation Compose
+    implementation 'androidx.navigation:navigation-compose:2.4.0-rc01'
+
+    // Compose ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07'
+
+    // Compose Lottie
+    implementation "com.airbnb.android:lottie-compose:$lottie_version"
 }
 
 kapt {
