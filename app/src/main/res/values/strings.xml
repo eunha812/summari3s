@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">summari3s</string>
+    <string name="title_activity_on_boarding">OnBoardingActivity</string>
+    <string name="title_activity_configuration">ConfigurationActivity</string>
+</resources>
