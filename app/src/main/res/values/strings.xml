@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">summari3s</string>
+    <string name="app_name">3줄요약</string>
     <string name="title_activity_on_boarding">OnBoardingActivity</string>
     <string name="title_activity_configuration">ConfigurationActivity</string>
 </resources>

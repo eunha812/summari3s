@@ -39,7 +39,7 @@ fun OnBoarding3Screen(onClickAction: () -> Unit) {
             )
         }
 
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.fillMaxWidth().padding(bottom = 40.dp)) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

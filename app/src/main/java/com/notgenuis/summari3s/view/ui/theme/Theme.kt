@@ -8,6 +8,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun Summari3sTheme(content: @Composable () -> Unit) {
+
     MaterialTheme(
         typography = Typography,
         shapes = Shapes,

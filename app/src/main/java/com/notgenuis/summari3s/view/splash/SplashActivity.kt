@@ -2,11 +2,13 @@ package com.notgenuis.summari3s.view.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.view.config.ConfigurationActivity
 import com.notgenuis.summari3s.view.onboard.OnBoardingActivity
@@ -31,14 +33,18 @@ class SplashActivity : ComponentActivity() {
                 }
             }
         }
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     private fun updateUI() {
         if (App.pref.isOnBoardingShowed()) {
-            startActivity(Intent(this, ConfigurationActivity::class.java))
+            startActivity(Intent(this, OnBoardingActivity::class.java))
             finish()
         } else {
-            App.pref.checkOnBoardingShowed()
             startActivity(Intent(this, OnBoardingActivity::class.java))
             finish()
         }

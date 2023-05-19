@@ -32,7 +32,7 @@ fun OnBoarding1Screen() {
         }
 
         Box(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp)
+            modifier = Modifier.fillMaxWidth().padding(bottom = 60.dp)
         ) {
             LottieLoader(url = "https://assets8.lottiefiles.com/packages/lf20_yaoli0yGEw.json")
         }

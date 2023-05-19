@@ -1,6 +1,7 @@
 package com.notgenuis.summari3s
 
 import android.app.Application
+import androidx.core.view.WindowCompat
 import com.notgenuis.summari3s.utils.PreferenceUtil
 import dagger.hilt.android.HiltAndroidApp
 
