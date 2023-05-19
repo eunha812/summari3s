@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.R
 import com.notgenuis.summari3s.view.config.ConfigurationActivity

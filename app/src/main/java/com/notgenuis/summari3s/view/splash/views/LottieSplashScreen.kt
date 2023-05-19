@@ -21,9 +21,9 @@ fun LottieSplashScreen(navigateToNext: () -> Unit) {
     var visible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(500)
         visible = false
-        delay(3500)
+        delay(2500)
         withContext(Dispatchers.Main) {
             navigateToNext()
         }
@@ -75,5 +75,5 @@ fun LottieSplashScreen(navigateToNext: () -> Unit) {
 @Composable
 fun SplashLottieLoader() {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash_lottie))
-    LottieAnimation(composition = composition, speed = 1.3f)
+    LottieAnimation(composition = composition, speed = 1.5f)
 }
