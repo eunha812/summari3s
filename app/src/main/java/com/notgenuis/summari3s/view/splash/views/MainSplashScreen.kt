@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun MainSplashScreen(updateUI: () -> Unit) {
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(1500)
         withContext(Dispatchers.Main) {
             updateUI()
         }

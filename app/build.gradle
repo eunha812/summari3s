@@ -99,6 +99,13 @@ dependencies {
 
     // Compose Lottie
     implementation "com.airbnb.android:lottie-compose:$lottie_version"
+
+    // Pager
+    implementation "com.google.accompanist:accompanist-pager:0.20.1"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.20.1"
+
+    // systemUi
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.0"
 }
 
 kapt {
