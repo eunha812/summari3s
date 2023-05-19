@@ -27,7 +27,7 @@ fun OnBoarding1Screen() {
                     .padding(top = 120.dp)
                     .align(Alignment.TopCenter),
                 painter = painterResource(id = R.drawable.onboarding1text),
-                contentDescription = "onBoarding1Text"
+                contentDescription = "중요한 문자를 한눈에 3줄 요약으로 보여드립니다."
             )
         }
 

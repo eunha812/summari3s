@@ -42,7 +42,7 @@ class SplashActivity : ComponentActivity() {
 
     private fun updateUI() {
         if (App.pref.isOnBoardingShowed()) {
-            startActivity(Intent(this, OnBoardingActivity::class.java))
+            startActivity(Intent(this, ConfigurationActivity::class.java))
             finish()
         } else {
             startActivity(Intent(this, OnBoardingActivity::class.java))
