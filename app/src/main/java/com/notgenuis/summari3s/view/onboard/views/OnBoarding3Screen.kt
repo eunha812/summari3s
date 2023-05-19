@@ -35,7 +35,7 @@ fun OnBoarding3Screen(onClickAction: () -> Unit) {
                     .padding(top = 120.dp)
                     .align(Alignment.TopCenter),
                 painter = painterResource(id = R.drawable.onboarding3text),
-                contentDescription = "onBoarding3Text"
+                contentDescription = "3줄 요약으로 삶의 질 향상을 느껴보세요."
             )
         }
 
