@@ -35,7 +35,7 @@ fun OnBoarding2Screen() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                LottieLoader(modifier = Modifier.align(Alignment.Center), url = "https://assets2.lottiefiles.com/packages/lf20_iFO6UB9JpP.json")
+                LottieLoader(modifier = Modifier.align(Alignment.Center).fillMaxWidth(), url = "https://assets2.lottiefiles.com/packages/lf20_iFO6UB9JpP.json")
             }
 
             Box(
