@@ -31,8 +31,12 @@ fun OnBoarding2Screen() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            // 호 추가
-            LottieLoader(url = "https://assets2.lottiefiles.com/packages/lf20_iFO6UB9JpP.json")
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                LottieLoader(modifier = Modifier.align(Alignment.Center), url = "https://assets2.lottiefiles.com/packages/lf20_iFO6UB9JpP.json")
+            }
 
             Box(
                 modifier = Modifier.width(screenWidth),
