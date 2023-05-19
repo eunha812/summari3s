@@ -44,7 +44,7 @@ fun OnBoarding3Screen(onClickAction: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                LottieLoader(url = "https://assets7.lottiefiles.com/packages/lf20_M1E6rGUbZs.json")
+                LottieLoader(modifier = Modifier.align(Alignment.Center), url = "https://assets7.lottiefiles.com/packages/lf20_M1E6rGUbZs.json")
             }
 
             Button(

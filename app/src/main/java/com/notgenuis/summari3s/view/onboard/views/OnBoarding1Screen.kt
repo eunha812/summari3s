@@ -32,9 +32,11 @@ fun OnBoarding1Screen() {
         }
 
         Box(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 60.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 60.dp)
         ) {
-            LottieLoader(url = "https://assets8.lottiefiles.com/packages/lf20_yaoli0yGEw.json")
+            LottieLoader(modifier = Modifier.align(Alignment.Center), url = "https://assets8.lottiefiles.com/packages/lf20_yaoli0yGEw.json")
         }
     }
 }
