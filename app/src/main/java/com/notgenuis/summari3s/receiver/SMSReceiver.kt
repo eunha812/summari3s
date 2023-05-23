@@ -15,8 +15,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MessageReceiver : BroadcastReceiver() {
+class SMSReceiver : BroadcastReceiver() {
     private val repository: MessageRepository = MessageRepositoryImpl()
+
+    private lateinit var context: Context
+    private lateinit var intent: Intent
+    private lateinit var notificationUtil: NotificationUtil
 
     override fun onReceive(context: Context, intent: Intent) {
         if(!App.pref.isModeOn()) {
@@ -24,13 +28,14 @@ class MessageReceiver : BroadcastReceiver() {
         }
 
         if(intent.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
-            processSms(context, intent)
-        } else if(intent.action == Telephony.Mms.Intents.){
-            processMms()
+            this.context = context
+            this.intent = intent
+            notificationUtil = NotificationUtil(context)
+            processSMS()
         }
     }
 
-    private fun processSms(context: Context, intent: Intent) {
+    private fun processSMS() {
         val pdus = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getSerializableExtra("pdus", Array<Any>::class.java)
         } else {
@@ -43,23 +48,17 @@ class MessageReceiver : BroadcastReceiver() {
                 val messageBody = sms?.messageBody.toString()
                 val messageFromAddress = sms?.displayOriginatingAddress.toString()
 
-                summariesMessage(context, messageFromAddress, messageBody)
+                summariesMessage(messageFromAddress, messageBody)
             }
         }
     }
 
-    private fun processMms() {
-
-    }
-
-    private fun summariesMessage(context: Context, address: String, message: String) {
-        val noti = NotificationUtil(context)
-
+    private fun summariesMessage(address: String, message: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = repository.getSummaries(message)
 
             if(result is ApiResult.Success) {
-                noti.createNotification(address, result.data, 1)
+                notificationUtil.createNotification(address, result.data, 1)
                 repository.save(address, message, result.data)
             } else {
                 repository.save(address, message, null)

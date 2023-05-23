@@ -1,6 +1,5 @@
 package com.notgenuis.summari3s.model.repository
 
-import android.util.Log
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.BuildConfig
 import com.notgenuis.summari3s.model.ApiResult
@@ -19,6 +18,10 @@ class MessageRepositoryImpl: MessageRepository {
     override suspend fun getSummaries(message: String): ApiResult<String> {
         return if(App.pref.getModelType() == ModelType.GOOGLE) getGoogleResponse(message)
         else getChatGPTResponse(message)
+    }
+
+    override fun save(senderNumber: String, origin: String, result: String?) {
+
     }
 
     private suspend fun getChatGPTResponse(message: String) : ApiResult<String> {

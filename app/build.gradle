@@ -76,6 +76,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     def lottie_version = "6.0.0"
     def room_version = "2.5.1"
+    def ted_permission_version = "3.3.0"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
@@ -112,6 +113,9 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler-processing:$room_version")
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+    // Ted Permission
+    implementation "io.github.ParkSangGwon:tedpermission-normal:$ted_permission_version"
 }
 
 kapt {
