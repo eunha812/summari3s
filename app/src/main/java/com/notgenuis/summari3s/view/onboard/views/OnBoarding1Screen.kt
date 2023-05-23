@@ -36,7 +36,7 @@ fun OnBoarding1Screen() {
                 .fillMaxWidth()
                 .padding(bottom = 60.dp)
         ) {
-            LottieLoader(modifier = Modifier.align(Alignment.Center).fillMaxWidth(), url = "https://assets8.lottiefiles.com/packages/lf20_yaoli0yGEw.json")
+            LottieLoader(source = R.raw.onboarding_1, modifier = Modifier.align(Alignment.Center).fillMaxWidth())
         }
     }
 }
