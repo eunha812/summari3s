@@ -20,6 +20,7 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "CHAT_GPT_API_KEY" , properties['chat_gpt_api_key']
+        buildConfigField "String", "BARD_API_KEY" , properties['bard_api_key']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
