@@ -7,9 +7,10 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.notgenuis.summari3s.R
 
 @Composable
-fun LottieLoader(url: String, modifier: Modifier) {
-    val composition by rememberLottieComposition(spec = LottieCompositionSpec.Url(url))
+fun LottieLoader(source : Int, modifier: Modifier) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(source))
     LottieAnimation(modifier = modifier, composition = composition, iterations = LottieConstants.IterateForever)
 }
