@@ -12,6 +12,7 @@ import com.notgenuis.summari3s.model.SummaryStrength.Companion.toSummaryStrength
 class PreferenceUtil(context: Context) {
     companion object {
         const val FILE_NAME = "preferences"
+        const val MODE = "mode"
         const val MODEL_TYPE = "modelType"
         const val SUMMARY_STRENGTH = "summaryStrength"
         const val SHOWED_ON_BOARDING = "showedOnBoarding"
@@ -27,6 +28,12 @@ class PreferenceUtil(context: Context) {
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
+
+    fun isModeOn() = prefs.getBoolean(MODE, false)
+
+    fun toggleMode() {
+        prefs.edit().putBoolean(MODE, !isModeOn()).apply()
+    }
 
     fun getModelType() = prefs.getString(MODEL_TYPE, null)?.toModelType() ?: ModelType.GOOGLE
 
