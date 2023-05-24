@@ -3,12 +3,9 @@ package com.notgenuis.summari3s.view.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun Summari3sTheme(content: @Composable () -> Unit) {
-
     MaterialTheme(
         typography = Typography,
         shapes = Shapes,
