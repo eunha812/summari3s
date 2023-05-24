@@ -62,13 +62,13 @@ fun HistoryScreen(viewModel: HistoryViewModel, notiID : Long) {
         }
     }
 
-    val onBackPressed : () -> Unit = {
-        if (bottomSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+    val onBackPressed: () -> Unit = {
+        if (bottomSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+            context.finish()
+        } else {
             scope.launch {
                 bottomSheetState.hide()
             }
-        } else {
-            context.finish()
         }
     }
 

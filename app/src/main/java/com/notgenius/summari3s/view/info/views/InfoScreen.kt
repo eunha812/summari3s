@@ -39,12 +39,12 @@ fun InfoScreen() {
     var text by remember { mutableStateOf("") }
 
     val onBackPressed: () -> Unit = {
-        if (bottomSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+        if (bottomSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+            context.finish()
+        } else {
             scope.launch {
                 bottomSheetState.hide()
             }
-        } else {
-            context.finish()
         }
     }
 
