@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.view.config.ConfigurationActivity
+import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.onboard.OnBoardingActivity
 import com.notgenuis.summari3s.view.splash.views.SplashScreen
 import com.notgenuis.summari3s.view.ui.theme.Summari3sTheme
@@ -42,7 +43,7 @@ class SplashActivity : ComponentActivity() {
 
     private fun updateUI() {
         if (App.pref.isOnBoardingShowed()) {
-            startActivity(Intent(this, ConfigurationActivity::class.java))
+            startActivity(Intent(this, HistoryActivity::class.java))
             finish()
         } else {
             startActivity(Intent(this, OnBoardingActivity::class.java))
