@@ -34,6 +34,12 @@
             android:label="@string/title_activity_history"
             android:theme="@style/Theme.Summari3s" />
         <activity
+            android:name=".view.info.InfoActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="@string/title_activity_info"
+            android:theme="@style/Theme.Summari3s" />
+        <activity
             android:name=".view.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:exported="true"

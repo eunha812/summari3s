@@ -1,6 +1,5 @@
 package com.notgenuis.summari3s.view.history.views
 
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -15,12 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
 import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
 import com.notgenuis.summari3s.viewmodel.HistoryViewModel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -130,15 +127,15 @@ fun HistoryScreen(viewModel: HistoryViewModel, notiID : Long) {
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(vertical = 20.dp),
+            topBar = { TopContent("HISTORY") }
         ) {
             Box(modifier = Modifier.padding(it)) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(backgroundColor1)
-                        .padding(vertical = 20.dp)
                 ) {
-                    TopContent()
                     LazyColumn(
                         modifier = Modifier
                             .padding(horizontal = 30.dp)

@@ -1,5 +1,7 @@
 package com.notgenuis.summari3s.view.history.views
 
+import android.content.Context
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -20,8 +22,8 @@ import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
 import com.notgenuis.summari3s.view.ui.theme.keyColorDark1
 
 @Composable
-fun TopContent() {
-    val context = LocalContext.current as HistoryActivity
+fun TopContent(title : String) {
+    val context = LocalContext.current as ComponentActivity
 
     Column(
         modifier = Modifier
@@ -43,7 +45,7 @@ fun TopContent() {
             )
         }
         Text(
-            text = "HISTORY",
+            text = title,
             modifier = Modifier.padding(start = 15.dp),
             color = keyColorDark1,
             style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 24.sp)

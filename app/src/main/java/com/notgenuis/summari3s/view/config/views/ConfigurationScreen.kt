@@ -30,6 +30,7 @@ import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.R
 import com.notgenuis.summari3s.view.config.*
 import com.notgenuis.summari3s.view.history.HistoryActivity
+import com.notgenuis.summari3s.view.info.InfoActivity
 import com.notgenuis.summari3s.view.ui.theme.keyColor1
 import com.notgenuis.summari3s.view.ui.theme.keyColor2
 import kotlinx.coroutines.delay
@@ -95,6 +96,8 @@ fun ConfigurationStateLottie(isOn: Boolean) {
 fun ConfigurationScreen(
     isModeOn: Boolean
 ) {
+    val context = LocalContext.current as ConfigurationActivity
+
     var isOn by remember { mutableStateOf(isModeOn) }
 
     val defaultSheetContent: @Composable () -> Unit = { Column(modifier = Modifier.height(1.dp)) {} }
@@ -188,6 +191,16 @@ fun ConfigurationScreen(
                         sheetContent = { ConfigurationStrengthBottomSheet(hideSheet) }
                         bottomSheetState.show()
                     }
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                ConfigurationButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    id = R.drawable.info,
+                    "앱 정보"
+                ) {
+                    context.startActivity(Intent(context, InfoActivity::class.java))
                 }
             }
         }
