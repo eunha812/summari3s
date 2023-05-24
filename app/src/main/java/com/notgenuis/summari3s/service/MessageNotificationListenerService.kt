@@ -7,15 +7,19 @@ import android.util.Log
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.model.ApiResult
 import com.notgenuis.summari3s.model.repository.MessageRepository
-import com.notgenuis.summari3s.model.repository.MessageRepositoryImpl
 import com.notgenuis.summari3s.utils.NotificationUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MessageNotificationListenerService : NotificationListenerService() {
-    private lateinit var repository: MessageRepository
-    private lateinit var notificationUtil: NotificationUtil
+    @Inject
+    lateinit var repository: MessageRepository
+    @Inject
+    lateinit var notificationUtil: NotificationUtil
 
     companion object {
         private val PACKAGE_NAMES = arrayOf(
@@ -31,7 +35,6 @@ class MessageNotificationListenerService : NotificationListenerService() {
     override fun onCreate() {
         super.onCreate()
         notificationUtil = NotificationUtil(this)
-        repository = MessageRepositoryImpl(this)
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {

@@ -1,15 +1,15 @@
 package com.notgenuis.summari3s.model.repository
 
-import androidx.lifecycle.LiveData
 import com.notgenuis.summari3s.model.ApiResult
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
+import kotlinx.coroutines.flow.Flow
 
 interface MessageRepository {
     suspend fun createSummary(address: String, message: String): ApiResult<String>
 
-    fun getMessages() : LiveData<MutableList<MessageEntity>>
+    fun getMessages() : Flow<List<MessageEntity>>
 
-    suspend fun updateMessage(entity: MessageEntity)
+    suspend fun updateMessage(entity: MessageEntity) : ApiResult<String>
 
     suspend fun deleteMessage(id: Long)
 }

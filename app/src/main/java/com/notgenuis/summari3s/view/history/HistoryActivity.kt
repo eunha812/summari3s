@@ -3,29 +3,26 @@ package com.notgenuis.summari3s.view.history
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Text
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
 import com.notgenuis.summari3s.view.history.views.*
 import com.notgenuis.summari3s.view.ui.theme.Summari3sTheme
 import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
+import com.notgenuis.summari3s.viewmodel.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 private var messageList = mutableListOf<MessageEntity>()
 
 @AndroidEntryPoint
 class HistoryActivity : ComponentActivity() {
+    private val viewModel: HistoryViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

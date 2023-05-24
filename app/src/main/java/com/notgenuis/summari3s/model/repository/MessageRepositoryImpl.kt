@@ -1,31 +1,20 @@
 package com.notgenuis.summari3s.model.repository
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.room.Room
-import androidx.room.withTransaction
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.BuildConfig
 import com.notgenuis.summari3s.model.ApiResult
 import com.notgenuis.summari3s.model.ModelType
-import com.notgenuis.summari3s.model.local.database.MessageDatabase
+import com.notgenuis.summari3s.model.local.dao.MessageDao
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
 import com.notgenuis.summari3s.model.remote.dto.*
 import com.notgenuis.summari3s.model.remote.service.BardServiceImpl
 import com.notgenuis.summari3s.model.remote.service.ChatGPTServiceImpl
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MessageRepositoryImpl(context: Context): MessageRepository {
-    private val database : MessageDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        MessageDatabase::class.java,
-        DATABASE_NAME
-    ).build()
-
-    private val messageDao = database.messageDao()
-
+class MessageRepositoryImpl(private val messageDao: MessageDao): MessageRepository {
     companion object {
         private const val BEARER = "Bearer "
         private const val DATABASE_NAME = "message_database.db"
@@ -46,20 +35,23 @@ class MessageRepositoryImpl(context: Context): MessageRepository {
         return result
     }
 
-    override fun getMessages(): LiveData<MutableList<MessageEntity>> {
+    override fun getMessages(): Flow<List<MessageEntity>> {
         return messageDao.getAllMessages()
     }
 
-    override suspend fun updateMessage(entity: MessageEntity) {
-        database.withTransaction {
+    override suspend fun updateMessage(entity: MessageEntity) : ApiResult<String> {
+        val result = createSummary(entity.senderNumber, entity.origin)
+
+        if(result is ApiResult.Success) {
+            entity.result = result.data
             messageDao.updateMessage(entity)
         }
+
+        return result
     }
 
     override suspend fun deleteMessage(id: Long) {
-        database.withTransaction {
-            messageDao.deleteMessageById(id)
-        }
+        messageDao.deleteMessageById(id)
     }
 
     private suspend fun insertMessage(address: String, message: String, summary: String?) {
@@ -67,9 +59,7 @@ class MessageRepositoryImpl(context: Context): MessageRepository {
             address, getDate(), message, summary
         )
 
-        database.withTransaction {
-            messageDao.insertMessage(entity)
-        }
+        messageDao.insertMessage(entity)
     }
 
     private suspend fun getChatGPTResponse(message: String) : ApiResult<String> {

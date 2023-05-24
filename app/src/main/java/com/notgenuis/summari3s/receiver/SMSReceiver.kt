@@ -30,9 +30,6 @@ class SMSReceiver : BroadcastReceiver() {
         if(intent.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
             this.context = context
             this.intent = intent
-            notificationUtil = NotificationUtil(context)
-            repository = MessageRepositoryImpl(context)
-
             processSMS()
         }
     }

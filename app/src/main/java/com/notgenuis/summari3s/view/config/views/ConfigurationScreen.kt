@@ -1,5 +1,6 @@
 package com.notgenuis.summari3s.view.config.views
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,6 +29,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.R
 import com.notgenuis.summari3s.view.config.*
+import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.ui.theme.keyColor1
 import com.notgenuis.summari3s.view.ui.theme.keyColor2
 import kotlinx.coroutines.delay
@@ -48,10 +50,7 @@ fun ConfigurationFab() {
         .size(50.dp)
         .clip(CircleShape)
         .clickable {
-//            context.startActivity(context, HistoryActivity::class.java)
-            Toast
-                .makeText(context, "asdf", Toast.LENGTH_SHORT)
-                .show()
+            context.startActivity(Intent(context, HistoryActivity::class.java))
         }) {
         Image(
             painter = painterResource(id = R.drawable.logo_typo),
