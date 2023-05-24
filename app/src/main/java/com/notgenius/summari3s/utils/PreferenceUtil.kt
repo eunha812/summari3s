@@ -35,7 +35,7 @@ class PreferenceUtil(context: Context) {
         prefs.edit().putBoolean(MODE, !isModeOn()).apply()
     }
 
-    fun getModelType() = prefs.getString(MODEL_TYPE, null)?.toModelType() ?: ModelType.GOOGLE
+    fun getModelType() = prefs.getString(MODEL_TYPE, null)?.toModelType() ?: ModelType.CHAT_GPT
 
     fun setModelType(modelType: ModelType) {
         prefs.edit().putString(MODEL_TYPE, modelType.typeName).apply()
