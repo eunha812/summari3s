@@ -9,11 +9,11 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-    namespace 'com.notgenuis.summari3s'
+    namespace 'com.notgenius.summari3s'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.notgenuis.summari3s"
+        applicationId "com.notgenius.summari3s"
         minSdk 26
         targetSdk 33
         versionCode 1
