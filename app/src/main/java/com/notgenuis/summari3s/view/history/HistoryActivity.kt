@@ -19,6 +19,7 @@ class HistoryActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val notiID = intent.getLongExtra("id", -1L)
 
         setContent {
             Summari3sTheme {
@@ -26,7 +27,7 @@ class HistoryActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = backgroundColor1
                 ) {
-                    HistoryScreen(viewModel)
+                    HistoryScreen(viewModel, notiID)
                 }
             }
         }

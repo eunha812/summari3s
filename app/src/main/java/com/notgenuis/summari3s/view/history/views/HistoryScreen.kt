@@ -1,11 +1,13 @@
 package com.notgenuis.summari3s.view.history.views
 
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -18,19 +20,35 @@ import com.notgenuis.summari3s.model.local.entity.MessageEntity
 import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
 import com.notgenuis.summari3s.viewmodel.HistoryViewModel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HistoryScreen(viewModel: HistoryViewModel) {
+fun HistoryScreen(viewModel: HistoryViewModel, notiID : Long) {
     val context = LocalContext.current as HistoryActivity
+    val scope = rememberCoroutineScope()
+    var notificationID by remember { mutableStateOf(notiID) }
+
     val list by viewModel.messages.collectAsState(initial = emptyList())
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(list) {
+        if (notificationID != -1L) {
+            var idx = 0
+            list.forEachIndexed { index, l ->
+                if (l.id == notiID)
+                    idx = index
+            }
+            listState.scrollToItem(idx)
+        }
+        notificationID = -1
+    }
 
     val defaultSheetContent: @Composable () -> Unit =
         { Column(modifier = Modifier.height(1.dp)) {} }
     var sheetContent by remember { mutableStateOf<@Composable () -> Unit>(defaultSheetContent) }
-    val scope = rememberCoroutineScope()
     val bottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
@@ -45,6 +63,19 @@ fun HistoryScreen(viewModel: HistoryViewModel) {
             bottomSheetState.hide()
         }
     }
+
+    val onBackPressed : () -> Unit = {
+        if (bottomSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+            scope.launch {
+                bottomSheetState.hide()
+            }
+        } else {
+            context.finish()
+        }
+    }
+
+    BackHandler(onBack = onBackPressed)
+
 
     var selectedIndex by remember { mutableStateOf(-1) }
 
@@ -111,7 +142,8 @@ fun HistoryScreen(viewModel: HistoryViewModel) {
                     LazyColumn(
                         modifier = Modifier
                             .padding(horizontal = 30.dp)
-                            .fillMaxHeight()
+                            .fillMaxHeight(),
+                        state = listState
                     ) {
                         itemsIndexed(list) { index, message ->
                             Spacer(modifier = Modifier.height(10.dp))

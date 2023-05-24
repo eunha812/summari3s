@@ -22,7 +22,7 @@ class MessageRepositoryImpl(private val messageDao: MessageDao): MessageReposito
         private const val TAG = "MessageRepositoryImpl_낫지니어스"
     }
 
-    override suspend fun createSummary(address: String, message: String): ApiResult<String> {
+    override suspend fun createSummary(address: String, message: String): Pair<ApiResult<String>,Long> {
         val result = if(App.pref.getModelType() == ModelType.GOOGLE) getGoogleResponse(message)
         else getChatGPTResponse(message)
 
@@ -32,7 +32,9 @@ class MessageRepositoryImpl(private val messageDao: MessageDao): MessageReposito
             insertMessage(address, message, null)
         }
 
-        return result
+        val lastId = messageDao.getLastMessage()?.id ?: -1
+
+        return Pair(result, lastId)
     }
 
     override fun getMessages(): Flow<List<MessageEntity>> {

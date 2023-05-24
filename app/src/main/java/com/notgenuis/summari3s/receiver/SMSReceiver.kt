@@ -55,9 +55,10 @@ class SMSReceiver : BroadcastReceiver() {
     private fun summariesMessage(address: String, message: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = repository.createSummary(address, message)
+            val summary = result.first
 
-            if(result is ApiResult.Success) {
-                notificationUtil.createNotification(address, result.data, 1)
+            if(summary is ApiResult.Success) {
+                notificationUtil.createNotification(address, summary.data, result.second)
             }
         }
     }
