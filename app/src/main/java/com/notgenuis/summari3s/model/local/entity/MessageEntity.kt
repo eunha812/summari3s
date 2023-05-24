@@ -13,7 +13,7 @@ data class MessageEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
-    constructor(id: Long, senderNumber: String, date: String, title: String, content: String) : this(senderNumber, date, title, content) {
+    constructor(id: Long, senderNumber: String, date: String, origin: String, result: String) : this(senderNumber, date, origin, result) {
         this.id = id
     }
 }
