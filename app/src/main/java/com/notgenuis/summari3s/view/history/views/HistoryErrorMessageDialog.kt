@@ -3,6 +3,7 @@ package com.notgenuis.summari3s.view.history.views
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +17,7 @@ import com.notgenuis.summari3s.view.ui.theme.keyColor1
 import com.notgenuis.summari3s.view.ui.theme.secondaryColor1
 
 @Composable
-fun HistoryErrorMessageDialog(onClickShowAll: () -> Unit, onClickCancel: () -> Unit) {
+fun HistoryErrorMessageDialog(onRetry: () -> Unit, onClickShowAll: () -> Unit, onClickCancel: () -> Unit) {
     AlertDialog(
         onDismissRequest = onClickCancel,
         title = {
@@ -36,21 +37,21 @@ fun HistoryErrorMessageDialog(onClickShowAll: () -> Unit, onClickCancel: () -> U
         buttons = {
             Column(modifier = Modifier.fillMaxWidth()) {
                 ColoredButton(
-                    onClick = { /*TODO*/ },
+                    onClick = onRetry,
                     color = secondaryColor1,
                     content = "요약 재시도",
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                 )
                 Spacer(modifier = Modifier.height(5.dp))
                 ColoredButton(
-                    onClick = { onClickShowAll() },
+                    onClick = onClickShowAll,
                     color = keyColor1,
                     content = "전체 내용 보기",
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                 )
                 Spacer(modifier = Modifier.height(5.dp))
                 BorderButton(
-                    onClick = { onClickCancel() },
+                    onClick = onClickCancel,
                     content = "취소",
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                 )

@@ -40,11 +40,19 @@ class MessageRepositoryImpl(private val messageDao: MessageDao): MessageReposito
     }
 
     override suspend fun updateMessage(entity: MessageEntity) : ApiResult<String> {
-        val result = createSummary(entity.senderNumber, entity.origin)
+        val result = if(App.pref.getModelType() == ModelType.GOOGLE) getGoogleResponse(entity.origin)
+        else getChatGPTResponse(entity.origin)
 
         if(result is ApiResult.Success) {
-            entity.result = result.data
-            messageDao.updateMessage(entity)
+            val newEntity = MessageEntity(
+                entity.id,
+                entity.senderNumber,
+                entity.date,
+                entity.origin,
+                result.data
+            )
+
+            messageDao.updateMessage(newEntity)
         }
 
         return result

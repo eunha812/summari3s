@@ -11,6 +11,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.notgenuis.summari3s.R
 import com.notgenuis.summari3s.view.config.ConfigurationActivity
+import com.notgenuis.summari3s.view.history.HistoryActivity
 
 class NotificationUtil(private val context: Context) {
     companion object {
@@ -59,7 +60,7 @@ class NotificationUtil(private val context: Context) {
             createNotificationChannel()
         }
 
-        val intent = Intent(context, ConfigurationActivity::class.java).also {
+        val intent = Intent(context, HistoryActivity::class.java).also {
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             it.putExtra(ID, id)
             it.putExtra(SENDER, sender)

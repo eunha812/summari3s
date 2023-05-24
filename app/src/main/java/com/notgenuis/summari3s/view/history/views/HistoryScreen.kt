@@ -1,6 +1,7 @@
 package com.notgenuis.summari3s.view.history.views
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,17 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
 import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
+import com.notgenuis.summari3s.viewmodel.HistoryViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HistoryScreen(list: MutableList<MessageEntity>) {
+fun HistoryScreen(viewModel: HistoryViewModel) {
     val context = LocalContext.current as HistoryActivity
-
+    val list by viewModel.messages.collectAsState(initial = emptyList())
 
     val defaultSheetContent: @Composable () -> Unit =
         { Column(modifier = Modifier.height(1.dp)) {} }
@@ -43,15 +46,13 @@ fun HistoryScreen(list: MutableList<MessageEntity>) {
         }
     }
 
-
-    val messageList by remember { mutableStateOf(list) }
     var selectedIndex by remember { mutableStateOf(-1) }
 
     val removeMessage: () -> Unit = {
         if (selectedIndex == -1) {
             Toast.makeText(context, "메시지를 불러오는데에 실패하였습니다.", Toast.LENGTH_SHORT).show()
         } else {
-            messageList.removeAt(selectedIndex)
+            viewModel.deleteMessage(list[selectedIndex].id)
             Toast.makeText(context, "메시지를 삭제하였습니다.", Toast.LENGTH_SHORT).show()
         }
         scope.launch {
@@ -64,20 +65,25 @@ fun HistoryScreen(list: MutableList<MessageEntity>) {
     var selectedMessage by remember { mutableStateOf(MessageEntity(-1, "", "", "", "")) }
 
     if (showAlertDialog) {
-        HistoryErrorMessageDialog(
-            onClickShowAll = {
-                scope.launch {
-                    sheetContent = {
-                        HistoryBottomSheetContent(
-                            message = selectedMessage,
-                            onClickCancel = hideSheet,
-                            onClickRemove = removeMessage
-                        )
-                    }
-                    bottomSheetState.show()
-                }
+        HistoryErrorMessageDialog(onRetry = {
+            viewModel.updateMessage(list[selectedIndex], {
                 showAlertDialog = false
-            }, onClickCancel = { showAlertDialog = false })
+            }) {
+                Toast.makeText(context, "요약에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }, onClickShowAll = {
+            scope.launch {
+                sheetContent = {
+                    HistoryBottomSheetContent(
+                        message = selectedMessage,
+                        onClickCancel = hideSheet,
+                        onClickRemove = removeMessage
+                    )
+                }
+                bottomSheetState.show()
+            }
+            showAlertDialog = false
+        }) { showAlertDialog = false }
     }
 
 
@@ -107,7 +113,7 @@ fun HistoryScreen(list: MutableList<MessageEntity>) {
                             .padding(horizontal = 30.dp)
                             .fillMaxHeight()
                     ) {
-                        itemsIndexed(messageList) { index, message ->
+                        itemsIndexed(list) { index, message ->
                             Spacer(modifier = Modifier.height(10.dp))
                             if (message.result == null) {
                                 ErrorRow(message = message, onClick = {

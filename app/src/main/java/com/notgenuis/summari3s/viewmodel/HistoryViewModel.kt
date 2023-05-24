@@ -16,18 +16,20 @@ class HistoryViewModel @Inject constructor(private val repository: MessageReposi
     val messages = repository.getMessages()
 
     fun deleteMessage(id: Long) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.deleteMessage(id)
         }
     }
 
-    fun updateMessage(entity: MessageEntity, onFail: () -> Unit) {
-        viewModelScope.launch {
+    fun updateMessage(entity: MessageEntity, onSuccess: () -> Unit, onFail: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = repository.updateMessage(entity)
 
-            if (result !is ApiResult.Success) {
-                withContext(Dispatchers.IO) {
-                    onFail()
+            withContext(Dispatchers.Main) {
+                if (result is ApiResult.Success) {
+                    onSuccess.invoke()
+                } else {
+                    onFail.invoke()
                 }
             }
         }
