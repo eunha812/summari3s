@@ -4,6 +4,7 @@ import android.app.Notification
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
+import com.notgenuis.summari3s.App
 import com.notgenuis.summari3s.model.ApiResult
 import com.notgenuis.summari3s.model.repository.MessageRepository
 import com.notgenuis.summari3s.model.repository.MessageRepositoryImpl
@@ -30,10 +31,14 @@ class MessageNotificationListenerService : NotificationListenerService() {
     override fun onCreate() {
         super.onCreate()
         notificationUtil = NotificationUtil(this)
-        repository = MessageRepositoryImpl()
+        repository = MessageRepositoryImpl(this)
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
+        if(!App.pref.isModeOn()) {
+            return
+        }
+
         for (name in PACKAGE_NAMES) {
             if(sbn?.packageName == name) {
                 val extras = sbn.notification.extras
@@ -59,13 +64,10 @@ class MessageNotificationListenerService : NotificationListenerService() {
 
     private fun summariesMessage(address: String, message: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = repository.getSummaries(message)
+            val result = repository.createSummary(address, message)
 
             if(result is ApiResult.Success) {
                 notificationUtil.createNotification(address, result.data, 1)
-                repository.save(address, message, result.data)
-            } else {
-                repository.save(address, message, null)
             }
         }
     }

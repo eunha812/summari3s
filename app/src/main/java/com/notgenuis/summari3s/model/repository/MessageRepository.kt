@@ -1,9 +1,15 @@
 package com.notgenuis.summari3s.model.repository
 
+import androidx.lifecycle.LiveData
 import com.notgenuis.summari3s.model.ApiResult
+import com.notgenuis.summari3s.model.local.entity.MessageEntity
 
 interface MessageRepository {
-    suspend fun getSummaries(message: String): ApiResult<String>
+    suspend fun createSummary(address: String, message: String): ApiResult<String>
 
-    fun save(senderNumber: String, origin: String, result: String?)
+    fun getMessages() : LiveData<MutableList<MessageEntity>>
+
+    suspend fun updateMessage(entity: MessageEntity)
+
+    suspend fun deleteMessage(id: Long)
 }

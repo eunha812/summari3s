@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SMSReceiver : BroadcastReceiver() {
-    private val repository: MessageRepository = MessageRepositoryImpl()
+    private lateinit var repository: MessageRepository
 
     private lateinit var context: Context
     private lateinit var intent: Intent
@@ -31,6 +31,8 @@ class SMSReceiver : BroadcastReceiver() {
             this.context = context
             this.intent = intent
             notificationUtil = NotificationUtil(context)
+            repository = MessageRepositoryImpl(context)
+
             processSMS()
         }
     }
@@ -55,13 +57,10 @@ class SMSReceiver : BroadcastReceiver() {
 
     private fun summariesMessage(address: String, message: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = repository.getSummaries(message)
+            val result = repository.createSummary(address, message)
 
             if(result is ApiResult.Success) {
                 notificationUtil.createNotification(address, result.data, 1)
-                repository.save(address, message, result.data)
-            } else {
-                repository.save(address, message, null)
             }
         }
     }
