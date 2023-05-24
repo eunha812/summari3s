@@ -57,6 +57,7 @@ fun HistoryErrorMessageDialog(onClickShowAll: () -> Unit, onClickCancel: () -> U
                 Spacer(modifier = Modifier.height(16.dp))
             }
         },
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        backgroundColor = Color.White
     )
 }

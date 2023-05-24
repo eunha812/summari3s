@@ -1,6 +1,5 @@
 package com.notgenuis.summari3s.view.history.views
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.notgenuis.summari3s.model.local.entity.MessageEntity
-import com.notgenuis.summari3s.view.config.ConfigurationActivity
 import com.notgenuis.summari3s.view.history.HistoryActivity
 import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
 import kotlinx.coroutines.delay
@@ -66,7 +64,6 @@ fun HistoryScreen(list: MutableList<MessageEntity>) {
     var selectedMessage by remember { mutableStateOf(MessageEntity(-1, "", "", "", "")) }
 
     if (showAlertDialog) {
-        Log.d("낫지니어스", "HistoryScreen: showAlertDialog is true")
         HistoryErrorMessageDialog(
             onClickShowAll = {
                 scope.launch {

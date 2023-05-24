@@ -1,7 +1,6 @@
 package com.notgenuis.summari3s.view.history.views
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -11,12 +10,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.notgenuis.summari3s.view.ui.theme.backgroundColor1
 
 @Composable
 fun BorderButton(onClick: () -> Unit, content: String, modifier: Modifier) {
     OutlinedButton(
         onClick = onClick,
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
         border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.2f)),
         shape = RoundedCornerShape(8.dp),
         modifier = modifier

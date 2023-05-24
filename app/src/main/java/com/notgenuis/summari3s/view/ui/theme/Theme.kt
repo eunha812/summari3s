@@ -16,18 +16,9 @@ fun Summari3sTheme(content: @Composable () -> Unit) {
         colors = lightColors(
             background = backgroundColor1,
             surface = keyColorLight1,
-            onSurface = keyColorDark1,
             primary = keyColor1,
             onPrimary = keyColorDark1,
             secondary = secondaryColor1
-//            primary = keyColor1,
-//            primaryVariant = keyColorDark1,
-//            onPrimary = Color.White,
-//            secondary = secondaryColor1,
-//            secondaryVariant = secondaryColorDark1,
-//            onSecondary = Color.White,
-//            error = Color(0xFFFF4B23),
-//            background = backgroundColor1,
         )
     )
 }
