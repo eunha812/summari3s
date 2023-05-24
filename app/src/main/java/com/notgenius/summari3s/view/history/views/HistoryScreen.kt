@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.notgenius.summari3s.model.local.entity.MessageEntity
+import com.notgenius.summari3s.view.common.TopContent
 import com.notgenius.summari3s.view.history.HistoryActivity
 import com.notgenius.summari3s.view.ui.theme.backgroundColor1
 import com.notgenius.summari3s.viewmodel.HistoryViewModel

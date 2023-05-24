@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.notgenius.summari3s.R
 import com.notgenius.summari3s.utils.readRawTextFile
 import com.notgenius.summari3s.view.config.views.*
-import com.notgenius.summari3s.view.history.views.TopContent
+import com.notgenius.summari3s.view.common.TopContent
 import com.notgenius.summari3s.view.info.InfoActivity
 import com.notgenius.summari3s.view.ui.theme.keyColorDark1
 import kotlinx.coroutines.launch

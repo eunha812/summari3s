@@ -1,4 +1,4 @@
-package com.notgenius.summari3s.view.history.views
+package com.notgenius.summari3s.view.common
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
