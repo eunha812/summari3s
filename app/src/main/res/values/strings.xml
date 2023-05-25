@@ -4,4 +4,5 @@
     <string name="title_activity_history">HistoryActivity</string>
     <string name="title_activity_on_boarding">OnBoardingActivity</string>
     <string name="title_activity_configuration">ConfigurationActivity</string>
+    <string name="message_database_name">message.db</string>
 </resources>

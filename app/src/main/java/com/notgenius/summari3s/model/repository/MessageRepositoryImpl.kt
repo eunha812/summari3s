@@ -1,7 +1,7 @@
 package com.notgenius.summari3s.model.repository
 
-import com.notgenius.summari3s.App
 import com.notgenius.summari3s.BuildConfig
+import com.notgenius.summari3s.App
 import com.notgenius.summari3s.model.ApiResult
 import com.notgenius.summari3s.model.ModelType
 import com.notgenius.summari3s.model.local.dao.MessageDao
@@ -17,7 +17,6 @@ import java.util.*
 class MessageRepositoryImpl(private val messageDao: MessageDao): MessageRepository {
     companion object {
         private const val BEARER = "Bearer "
-        private const val DATABASE_NAME = "message_database.db"
 
         private const val TAG = "MessageRepositoryImpl_낫지니어스"
     }

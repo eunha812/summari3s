@@ -18,16 +18,16 @@ import com.notgenius.summari3s.view.common.CancelButton
 import com.notgenius.summari3s.view.common.SubmitButton
 
 @Composable
-fun ConfigurationEngineBottomSheet(hideSheet: () -> Unit) {
+fun ConfigurationAPIBottomSheet(hideSheet: () -> Unit) {
     val (modelType, setModelType) = remember { mutableStateOf(App.pref.getModelType()) }
 
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 24.dp)) {
         Spacer(modifier = Modifier.height(24.dp))
-        Text(text = "엔진을 선택하세요.", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+        Text(text = "일꾼을 선택하세요.", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
         Spacer(modifier = Modifier.height(28.dp))
-        Text(text = "문자를 요약할 엔진을 직접 선택할 수 있습니다.", fontWeight = FontWeight.Normal, fontSize = 13.sp, color = Color.Gray)
+        Text(text = "문자를 요약할 일꾼을 직접 선택할 수 있습니다.", fontWeight = FontWeight.Normal, fontSize = 13.sp, color = Color.Gray)
         Spacer(modifier = Modifier.height(20.dp))
         ConfigurationRadioButton(Modifier.fillMaxWidth(), modelType, ModelType.CHAT_GPT, setModelType)
         ConfigurationRadioButton(Modifier.fillMaxWidth(), modelType, ModelType.GOOGLE, setModelType)

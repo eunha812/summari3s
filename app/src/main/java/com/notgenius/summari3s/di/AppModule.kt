@@ -2,6 +2,7 @@ package com.notgenius.summari3s.di
 
 import android.content.Context
 import androidx.room.Room
+import com.notgenius.summari3s.R
 import com.notgenius.summari3s.model.local.dao.MessageDao
 import com.notgenius.summari3s.model.local.database.MessageDatabase
 import com.notgenius.summari3s.model.repository.MessageRepository
@@ -23,7 +24,7 @@ class AppModule {
     ) = Room.databaseBuilder(
         context,
         MessageDatabase::class.java,
-        "message.db"
+        context.resources.getString(R.string.message_database_name)
     ).build()
 
     @Provides

@@ -167,11 +167,11 @@ fun ConfigurationScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp),
                     id = R.drawable.ic_wrench,
-                    "엔진 선택"
+                    "일꾼 선택"
                 ) {
                     scope.launch {
                         delay(100)
-                        sheetContent = { ConfigurationEngineBottomSheet(hideSheet) }
+                        sheetContent = { ConfigurationAPIBottomSheet(hideSheet) }
                         bottomSheetState.show()
                     }
                 }
@@ -181,7 +181,7 @@ fun ConfigurationScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp),
                     id = R.drawable.ic_funnel,
-                    "강도"
+                    "강도 선택"
                 ) {
                     scope.launch {
                         delay(100)

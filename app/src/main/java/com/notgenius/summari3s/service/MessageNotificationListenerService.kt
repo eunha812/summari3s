@@ -58,11 +58,7 @@ class MessageNotificationListenerService : NotificationListenerService() {
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        for (name in PACKAGE_NAMES) {
-            if(sbn?.packageName == name) {
-                Log.d(TAG, "onNotificationRemoved: ")
-            }
-        }
+        super.onNotificationRemoved(sbn)
     }
 
     private fun summariesMessage(address: String, message: String) {
