@@ -1,5 +1,6 @@
 package com.notgenius.summari3s.view.history.views
 
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -33,15 +34,20 @@ fun HistoryScreen(viewModel: HistoryViewModel, notiID : Long) {
     val listState = rememberLazyListState()
 
     LaunchedEffect(list) {
+        if(list.isEmpty()) {
+            return@LaunchedEffect
+        }
+
         if (notificationID != -1L) {
             var idx = 0
             list.forEachIndexed { index, l ->
-                if (l.id == notiID)
+                if (l.id == notificationID)
                     idx = index
             }
             listState.scrollToItem(idx)
         }
-        notificationID = -1
+
+        notificationID = -1L
     }
 
     val defaultSheetContent: @Composable () -> Unit =
